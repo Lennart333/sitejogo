@@ -1,1301 +1,274 @@
-🔄 **HTML Edit Mode** - Processing your edit request...
-
-Here are the SEARCH/REPLACE diffs to add new sections to the vampire mining game:
-
-1. First, let's add a new section tab system:
-
-```diff
-<<<<<<< SEARCH
-    </main>
-
-    <script>
-=======
-    </main>
-
-    <div class="flex justify-center mb-8">
-        <button class="vampire-button px-4 py-2 mx-2 tab-btn active" data-tab="mining">Mineração</button>
-        <button class="vampire-button px-4 py-2 mx-2 tab-btn" data-tab="castle">Castelo</button>
-        <button class="vampire-button px-4 py-2 mx-2 tab-btn" data-tab="hunt">Caçada</button>
-    </div>
-
-    <script>
->>>>>>> REPLACE
-
-2
-```
-. Add new CSS for the tabs:
-
-```diff
-<<<<<<< SEARCH
-        .pulse {
-            animation: pulse 1s infinite alternate;
-        }
-=======
-        .pulse {
-            animation: pulse 1s infinite alternate;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .tab-btn.active {
-            background: linear-gradient(to bottom, #4a0a22 0%, #2a0515 100%);
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
-        }
->>>>>>> REPLACE
-```
-
-
-3. Add the new game sections:
-
-```diff
-<<<<<<< SEARCH
-        <section class="mine-area rounded-lg h-64 w-full mb-8 flex items-center justify-center cursor-crosshair relative" id="mine">
-=======
-        <section class="mine-area rounded-lg h-64 w-full mb-8 flex items-center justify-center cursor-crosshair relative tab-content active" id="mine">
-        </section>
-
-        <section class="castle-area rounded-lg h-64 w-full mb-8 flex items-center justify-center relative tab-content" id="castle">
-            <img src="https://placehold.co/600x400?text=Dark+Castle" 
-                 alt="Castelo sombrio com torres altas e vitrais sangrentos" 
-                 class="opacity-30 w-full h-full object-cover" />
-            <div class="absolute inset-0 flex items-center justify-center">
-                <p class="text-xl text-center p-4 bg-black bg-opacity-50 rounded-lg">
-                    Gerencie seu reino vampírico<br>
-                    <span class="text-sm text-red-300">Aprimore suas habilidades e servos</span>
-                </p>
-            </div>
-        </section>
-
-        <section class="hunt-area rounded-lg h-64 w-full mb-8 flex items-center justify-center relative tab-content" id="hunt">
-            <img src="https://placehold.co/600x400?text=Night+Hunt" 
-                 alt="Floresta sombria com lua cheia e névoa" 
-                 class="opacity-30 w-full h-full object-cover" />
-            <div class="absolute inset-0 flex items-center justify-center">
-                <p class="text-xl text-center p-4 bg-black bg-opacity-50 rounded-lg">
-                    Caçada noturna por recursos<br>
-                    <span class="text-sm text-red-300">Encontre vítimas e tesouros</span>
-                </p>
-            </div>
-        </section>
->>>>>>> REPLACE
-
-4
-```
-. Add JavaScript for tab functionality:
-
-```diff
-<<<<<<< SEARCH
-        // Initialize game when loaded
-        window.addEventListener('load', initGame);
-=======
-        // Tab functionality
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Update active tab button
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                
-                // Show corresponding content
-                const tabId = btn.getAttribute('data-tab');
-                document.querySelectorAll('.tab-content').forEach(content => {
-                    content.classList.remove('active');
-                });
-                document.getElementById(tabId).classList.add('active');
-            });
-        });
-
-        // Initialize game when loaded
-        window.addEventListener('load', initGame);
->>>>>>> REPLACE
-
-Summary
-```
-:
-1. Added a tab navigation system with 3 sections: Mining, Castle, and Hunt
-2. Added CSS styles for the tabs and tab content
-3. Added new sections for Castle and Hunt gameplay with placeholder images
-4. Added JavaScript to handle tab switching functionality
-
-Would you like me to provide additional changes for adding more gameplay mechanics to these new sections?Here is the updated HTML content after applying above edits:
-
-```html
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mina Sombria - Jogo Vampírico</title>
+    <title>Ordem das Sombras Eternas</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=EB+Garamond:wght@400;500;600&display=swap');
         
         body {
-            font-family: 'IM Fell English SC', serif;
-            background-color: #0a0408;
-            color: #e0b0d0;
-            min-height: 100vh;
+            font-family: 'EB Garamond', serif;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
             overflow-x: hidden;
         }
         
-        .vampire-button {
-            background: linear-gradient(to bottom, #2a0a22 0%, #1a0515 100%);
-            border: 1px solid #6b2737;
-            color: #d9a3b3;
-            text-shadow: 0 0 5px #ff0000;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
+        .title-font {
+            font-family: 'Cinzel Decorative', cursive;
         }
         
-        .vampire-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(139, 0, 0, 0.4);
-            color: #fff;
-            text-shadow: 0 0 10px #ff0000;
+        .blood-text {
+            color: #8b0000;
+            text-shadow: 0 0 5px rgba(139, 0, 0, 0.5);
         }
         
-        .vampire-button:active {
-            transform: translateY(0);
+        .gothic-border {
+            border: 1px solid #2a2a2a;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
         }
         
-        .vampire-button::after {
-            content: '';
+        .tarot-card {
+            perspective: 1000px;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        
+        .tarot-card:hover {
+            transform: rotateY(180deg);
+        }
+        
+        .tarot-front, .tarot-back {
+            backface-visibility: hidden;
             position: absolute;
-            top: -50%;
-            left: -60%;
-            width: 200%;
-            height: 200%;
-            background: rgba(255, 255, 255, 0.1);
-            transform: rotate(30deg);
-            transition: all 0.3s;
+            width: 100%;
+            height: 100%;
         }
         
-        .vampire-button:hover::after {
-            left: 100%;
+        .tarot-back {
+            transform: rotateY(180deg);
+            background: #111;
+        }
+        
+        .flicker {
+            animation: flicker 3s infinite alternate;
+        }
+        
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                opacity: 1;
+            }
+            20%, 22%, 24%, 55% {
+                opacity: 0.6;
+            }
         }
         
         .blood-drop {
             position: absolute;
-            background-color: rgba(139, 0, 0, 0.7);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 10;
-        }
-        
-        .mine-area {
-            background: linear-gradient(rgba(10, 4, 8, 0.7), rgba(10, 4, 8, 0.7)), 
-                        url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/75ab8333-454a-4403-aa92-c48ffa461bd6.png');
-            background-size: cover;
-            background-position: center;
-            border: 2px solid #6b2737;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .resource-sparkle {
-            position: absolute;
             width: 5px;
             height: 5px;
-            background-color: rgba(255, 215, 0, 0.8);
+            background: #8b0000;
             border-radius: 50%;
-            pointer-events: none;
-            z-index: 5;
+            filter: blur(1px);
+            animation: fall 3s linear infinite;
         }
         
-        .bat-animation {
-            position: absolute;
-            width: 30px;
-            height: 20px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            pointer-events: none;
-            z-index: 3;
-            animation: fly 15s linear infinite;
-        }
-        
-        @keyframes fly {
-            0% {
-                transform: translateX(-100px) rotateY(180deg);
-            }
-            100% {
-                transform: translateX(calc(100vw + 100px)) rotateY(180deg);
-            }
-        }
-        
-        .pulse {
-            animation: pulse 1s infinite alternate;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .tab-btn.active {
-            background: linear-gradient(to bottom, #4a0a22 0%, #2a0515 100%);
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
-        }
-        
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
-            }
-            100% {
-                transform: scale(1.05);
-                box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
             }
         }
     </style>
 </head>
-<body class="p-4">
-    <header class="text-center mb-8">
-        <h1 class="text-4xl md:text-5xl font-bold text-red-900 mb-2">Mina Sombria</h1>
-        <div class="flex justify-center gap-8">
-            <div class="text-center">
-                <h3 class="text-xl text-purple-200">Sangue Coletado</h3>
-                <p id="blood-count" class="text-3xl text-red-400">0</p>
-            </div>
-            <div class="text-center">
-                <h3 class="text-xl text-purple-200">Ossos</h3>
-                <p id="bone-count" class="text-3xl text-gray-300">0</p>
-            </div>
-            <div class="text-center">
-                <h3 class="text-xl text-purple-200">Almas</h3>
-                <p id="soul-count" class="text-3xl text-blue-300">0</p>
+<body class="min-h-screen relative">
+    <!-- Efeito de gotas de sangue -->
+    <div id="blood-drops"></div>
+    
+    <!-- Cabeçalho -->
+    <header class="py-6 gothic-border border-t-0 border-l-0 border-r-0">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col items-center">
+                <h1 class="title-font text-4xl md:text-5xl lg:text-6xl blood-text mb-2 flicker">ORDEM DAS SOMBRAS ETERNAS</h1>
+                <p class="text-sm italic text-gray-500">Arcanos do Conhecimento Proibido</p>
             </div>
         </div>
     </header>
-
-    <main class="max-w-4xl mx-auto">
-        <section class="mine-area rounded-lg h-64 w-full mb-8 flex items-center justify-center cursor-crosshair relative tab-content active" id="mine">
-        </section>
-
-        <section class="castle-area rounded-lg h-64 w-full mb-8 flex items-center justify-center relative tab-content" id="castle">
-            <img src="https://placehold.co/600x400?text=Dark+Castle" 
-                 alt="Castelo sombrio com torres altas e vitrais sangrentos" 
-                 class="opacity-30 w-full h-full object-cover" />
-            <div class="absolute inset-0 flex items-center justify-center">
-                <p class="text-xl text-center p-4 bg-black bg-opacity-50 rounded-lg">
-                    Gerencie seu reino vampírico<br>
-                    <span class="text-sm text-red-300">Aprimore suas habilidades e servos</span>
-                </p>
-            </div>
-        </section>
-
-        <section class="hunt-area rounded-lg h-64 w-full mb-8 flex items-center justify-center relative tab-content" id="hunt">
-            <img src="https://placehold.co/600x400?text=Night+Hunt" 
-                 alt="Floresta sombria com lua cheia e névoa" 
-                 class="opacity-30 w-full h-full object-cover" />
-            <div class="absolute inset-0 flex items-center justify-center">
-                <p class="text-xl text-center p-4 bg-black bg-opacity-50 rounded-lg">
-                    Caçada noturna por recursos<br>
-                    <span class="text-sm text-red-300">Encontre vítimas e tesouros</span>
-                </p>
-            </div>
-        </section>
-            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/018095fd-60c0-420a-b233-95086bfc6956.png" 
-                 alt="Interior de caverna vampírica com paredes de pedra negra e veios de cristais vermelhos sangrentos" 
-                 class="opacity-30 w-full h-full object-cover" />
-            <div class="absolute inset-0 flex items-center justify-center">
-                <p class="text-xl text-center p-4 bg-black bg-opacity-50 rounded-lg">
-                    Clique na mina para extrair recursos<br>
-                    <span class="text-sm text-red-300">Cada clique rende 1 unidade de Sangue</span>
-                </p>
-            </div>
-        </section>
-
-        <section class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-            <div class="bg-black bg-opacity-30 p-4 rounded-lg border border-purple-900">
-                <h3 class="text-xl text-red-300 mb-2">Upgrades de Garra</h3>
-                <div class="space-y-2">
-                    <div>
-                        <button class="vampire-button w-full p-2 rounded mb-1 upgrade-btn" data-cost="100" data-resource="blood" data-upgrade="click-power">
-                            Garras Afiadas (Nível 1)<br>
-                            <span class="text-xs">+2 Sangue por clique</span>
-                            <span class="block text-yellow-300">Custo: 100 Sangue</span>
-                        </button>
-                    </div>
-                    <div>
-                        <button class="vampire-button w-full p-2 rounded mb-1 upgrade-btn" data-cost="500" data-resource="blood" data-upgrade="click-power-2">
-                            Garras Venenosas (Nível 2)<br>
-                            <span class="text-xs">+5 Sangue por clique</span>
-                            <span class="block text-yellow-300">Custo: 500 Sangue</span>
-                        </button>
+    
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-black/70 z-10"></div>
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5d238536-e9ee-4041-a13f-d383090dcefb.png" alt="Figura sombria do arcano do Enforcado do Tarot em estilo vampírico, suspenso por uma perna com cordas de seda negra, rodeado por névoa e símbolos ocultos" class="absolute w-full h-full object-cover" />
+        
+        <div class="relative z-20 text-center px-4">
+            <h2 class="title-font text-3xl md:text-5xl lg:text-6xl blood-text mb-6">DESPERTE O VAMPIRISMO INTERIOR</h2>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-8">Entre nas sombras onde o conhecimento proibido aguarda. A iniciação não é para os fracos de espírito.</p>
+            <button class="bg-transparent border border-[#8b0000] text-[#8b0000] hover:bg-[#8b0000] hover:text-black px-8 py-3 transition duration-300 gothic-border">MANIFESTE SEU INTERESSE</button>
+        </div>
+    </section>
+    
+    <!-- Seção de Introdução -->
+    <section class="py-20 bg-gradient-to-b from-black to-[#0a0a0a]">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2">
+                    <div class="tarot-card relative w-64 h-96 mx-auto">
+                        <div class="tarot-front gothic-border w-full h-full bg-cover bg-center" style="background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/65eb3634-26e7-4d09-86c5-3fc3d946f641.png')">
+                            <div class="absolute inset-0 bg-black/30"></div>
+                        </div>
+                        <div class="tarot-back flex items-center justify-center p-4 gothic-border">
+                            <p class="text-center italic">"Aquele que se sacrifica no altar do conhecimento alcança a imortalidade da alma."</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="bg-black bg-opacity-30 p-4 rounded-lg border border-purple-900">
-                <h3 class="text-xl text-red-300 mb-2">Servos Vampíricos</h3>
-                <div class="space-y-2">
-                    <div>
-                        <button class="vampire-button w-full p-2 rounded mb-1 auto-clicker-btn" data-cost="50" data-resource="bones" data-upgrade="vampire-1">
-                            Morcego Familiar<br>
-                            <span class="text-xs">0.2 Sangue/seg</span>
-                            <span class="block text-yellow-300">Custo: 50 Ossos</span>
-                        </button>
-                        <p class="text-sm" id="vampire-1-count">0 possuídos</p>
-                    </div>
-                    <div>
-                        <button class="vampire-button w-full p-2 rounded mb-1 auto-clicker-btn" data-cost="250" data-resource="bones" data-upgrade="vampire-2">
-                            Vampiro Júnior<br>
-                            <span class="text-xs">1 Sangue/seg</span>
-                            <span class="block text-yellow-300">Custo: 250 Ossos</span>
-                        </button>
-                        <p class="text-sm" id="vampire-2-count">0 possuídos</p>
-                    </div>
+                <div class="lg:w-1/2">
+                    <h2 class="title-font text-3xl md:text-4xl blood-text mb-6">A ORDEM</h2>
+                    <p class="mb-4 text-lg">Nas profundezas da noite, onde os fracos tremem, ergue-se a Ordem das Sombras Eternas - um círculo de mentes iluminadas que transcenderam as limitações do mundo profano.</p>
+                    <p class="mb-4 text-lg">Não somos uma ordem iniciática comum. Nosso conhecimento flui das fontes mais obscuras - magia negra, vampirismo energético, bruxaria ancestral e os mistérios que a maioria teme contemplar.</p>
+                    <p class="mb-6 text-lg">Aqui, o arcano do Enforcado não representa sacrifício, mas a suspensão voluntária entre mundos - o estado liminar onde o verdadeiro poder é adquirido.</p>
+                    <button class="bg-transparent border border-[#8b0000] text-[#8b0000] hover:bg-[#8b0000] hover:text-black px-6 py-2 transition duration-300 gothic-border">EXPLORAR OS ENSINAMENTOS</button>
                 </div>
             </div>
-
-            <div class="bg-black bg-opacity-30 p-4 rounded-lg border border-purple-900">
-                <h3 class="text-xl text-red-300 mb-2">Rituais Sombrios</h3>
-                <div class="space-y-2">
-                    <div>
-                        <button class="vampire-button w-full p-2 rounded mb-1 ritual-btn" data-cost="100" data-resource="souls" data-upgrade="ritual-1">
-                            Ritual de Transformação<br>
-                            <span class="text-xs">Converte 100 Sangue em 1 Osso</span>
-                            <span class="block text-yellow-300">Custo: 1 Alma</span>
-                        </button>
-                    </div>
-                    <div>
-                        <button class="vampire-button w-full p-2 rounded mb-1 ritual-btn" data-cost="1000" data-resource="souls" data-upgrade="ritual-2">
-                            Sacrifício Sanguinário<br>
-                            <span class="text-xs">Converte 1000 Sangue em 1 Alma</span>
-                            <span class="block text-yellow-300">Custo: 10 Ossos</span>
-                        </button>
-                    </div>
+        </div>
+    </section>
+    
+    <!-- Seção de Pilares -->
+    <section class="py-20 bg-black">
+        <div class="container mx-auto px-4">
+            <h2 class="title-font text-3xl md:text-4xl blood-text mb-16 text-center">OS QUATRO PILARES DA ORDEM</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Pilar 1 -->
+                <div class="gothic-border p-6 hover:border-[#8b0000] transition duration-300 h-full">
+                    <div class="text-[#8b0000] text-4xl mb-4">I</div>
+                    <h3 class="title-font text-xl blood-text mb-3">MAGIA NEGRA</h3>
+                    <p>As artes proibidas que manipulam as forças primordiais da criação e destruição. Não para os fracos de coração.</p>
+                </div>
+                
+                <!-- Pilar 2 -->
+                <div class="gothic-border p-6 hover:border-[#8b0000] transition duration-300 h-full">
+                    <div class="text-[#8b0000] text-4xl mb-4">II</div>
+                    <h3 class="title-font text-xl blood-text mb-3">VAMPIRISMO</h3>
+                    <p>A arte suprema da subsistência energética. Domine o fluxo vital que permeia todas as coisas vivas.</p>
+                </div>
+                
+                <!-- Pilar 3 -->
+                <div class="gothic-border p-6 hover:border-[#8b0000] transition duration-300 h-full">
+                    <div class="text-[#8b0000] text-4xl mb-4">III</div>
+                    <h3 class="title-font text-xl blood-text mb-3">BRUXARIA</h3>
+                    <p>Os antigos ritos que conectam o praticante às forças ancestrais da terra e do cosmos.</p>
+                </div>
+                
+                <!-- Pilar 4 -->
+                <div class="gothic-border p-6 hover:border-[#8b0000] transition duration-300 h-full">
+                    <div class="text-[#8b0000] text-4xl mb-4">IV</div>
+                    <h3 class="title-font text-xl blood-text mb-3">MISTÉRIOS</h3>
+                    <p>O conhecimento oculto reservado apenas para aqueles que provaram seu valor nas trevas.</p>
                 </div>
             </div>
-        </section>
-    </main>
-
-    <div class="flex justify-center mb-8">
-        <button class="vampire-button px-4 py-2 mx-2 tab-btn active" data-tab="mining">Mineração</button>
-        <button class="vampire-button px-4 py-2 mx-2 tab-btn" data-tab="castle">Castelo</button>
-        <button class="vampire-button px-4 py-2 mx-2 tab-btn" data-tab="hunt">Caçada</button>
-    </div>
-
+        </div>
+    </section>
+    
+    <!-- Seção de Citação -->
+    <section class="py-32 bg-[#0a0a0a] relative overflow-hidden">
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-[#8b0000] opacity-5 text-9xl font-bold title-font rotate-12">XII</div>
+        </div>
+        <div class="container mx-auto px-4 relative z-10">
+            <blockquote class="max-w-4xl mx-auto text-center">
+                <p class="text-2xl md:text-3xl italic mb-6">"O Enforcado vê o mundo invertido porque somente através da suspensão de todas as certezas pode-se vislumbrar a verdadeira natureza da realidade."</p>
+                <footer class="text-[#8b0000]">— Mestre V., O Eterno</footer>
+            </blockquote>
+        </div>
+    </section>
+    
+    <!-- Rodapé -->
+    <footer class="py-12 bg-black border-t border-[#2a2a2a]">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="title-font text-xl blood-text mb-2">ORDEM DAS SOMBRAS ETERNAS</h3>
+                    <p class="text-sm text-gray-500">© 2023 Todos os direitos reservados</p>
+                </div>
+                <div class="flex gap-4">
+                    <a href="#" class="text-gray-500 hover:text-[#8b0000] transition duration-300">Termos</a>
+                    <a href="#" class="text-gray-500 hover:text-[#8b0000] transition duration-300">Privacidade</a>
+                    <a href="#" class="text-gray-500 hover:text-[#8b0000] transition duration-300">Contato</a>
+                </div>
+            </div>
+            <div class="mt-12 text-center text-xs text-gray-700">
+                <p>Aviso: Este é um site fictício. Qualquer semelhança com ordens reais é mera coincidência.</p>
+            </div>
+        </div>
+    </footer>
+    
     <script>
-        // Game state
-        const gameState = {
-            blood: 0,
-            bones: 0,
-            souls: 0,
-            clickPower: 1,
-            upgrades: {
-                'click-power': false,
-                'click-power-2': false,
-                'vampire-1': 0,
-                'vampire-2': 0
-            },
-            autoClickers: {
-                'vampire-1': {
-                    rate: 0.2,
-                    cost: 50
-                },
-                'vampire-2': {
-                    rate: 1,
-                    cost: 250
-                }
-            },
-            rituals: {
-                'ritual-1': {
-                    bloodCost: 100,
-                    boneReward: 1,
-                    soulCost: 1
-                },
-                'ritual-2': {
-                    bloodCost: 1000,
-                    soulReward: 1,
-                    boneCost: 10
-                }
-            }
-        };
-
-        // DOM elements
-        const mineArea = document.getElementById('mine');
-        const bloodCountElement = document.getElementById('blood-count');
-        const boneCountElement = document.getElementById('bone-count');
-        const soulCountElement = document.getElementById('soul-count');
-
-        // Auto-clicker interval
-        let autoClickerInterval;
-
-        // Initialize game
-        function initGame() {
-            updateUI();
-            loadGame();
-            startAutoClickers();
+        // Criar efeito de gotas de sangue
+        function createBloodDrops() {
+            const container = document.getElementById('blood-drops');
+            const dropsCount = 20;
             
-            // Add bats for atmosphere
-            spawnBats();
-            setInterval(spawnBats, 10000);
-        }
-
-        // Save game to localStorage
-        function saveGame() {
-            localStorage.setItem('vampireMineSave', JSON.stringify(gameState));
-        }
-
-        // Load game from localStorage
-        function loadGame() {
-            const savedGame = localStorage.getItem('vampireMineSave');
-            if (savedGame) {
-                const parsedGame = JSON.parse(savedGame);
-                Object.assign(gameState, parsedGame);
-                updateUI();
+            for (let i = 0; i < dropsCount; i++) {
+                const drop = document.createElement('div');
+                drop.classList.add('blood-drop');
+                
+                // Posição aleatória
+                drop.style.left = `${Math.random() * 100}vw`;
+                drop.style.top = `-10px`;
+                
+                // Tamanho e opacidade aleatórios
+                const size = 2 + Math.random() * 4;
+                drop.style.width = `${size}px`;
+                drop.style.height = `${size}px`;
+                drop.style.opacity = 0.3 + Math.random() * 0.7;
+                
+                // Duração da animação aleatória
+                drop.style.animationDuration = `${2 + Math.random() * 4}s`;
+                drop.style.animationDelay = `${Math.random() * 5}s`;
+                
+                container.appendChild(drop);
             }
         }
-
-        // Start auto-clickers
-        function startAutoClickers() {
-            if (autoClickerInterval) clearInterval(autoClickerInterval);
+        
+        // Efeito de digitação para títulos
+        function typeWriter(element, text, speed) {
+            let i = 0;
+            element.textContent = '';
             
-            autoClickerInterval = setInterval(() => {
-                let bloodPerSecond = 0;
-                
-                // Calculate blood from all auto-clickers
-                bloodPerSecond += gameState.upgrades['vampire-1'] * 0.2;
-                bloodPerSecond += gameState.upgrades['vampire-2'] * 1;
-                
-                if (bloodPerSecond > 0) {
-                    gameState.blood += bloodPerSecond;
-                    updateResourceCounters();
-                    createSparkles(Math.floor(bloodPerSecond));
+            function typing() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typing, speed);
                 }
-            }, 1000);
-        }
-
-        // Update all UI elements
-        function updateUI() {
-            updateResourceCounters();
-            updateUpgradeButtons();
-            updateAutoClickerCounts();
-        }
-
-        // Update resource counters
-        function updateResourceCounters() {
-            bloodCountElement.textContent = Math.floor(gameState.blood);
-            boneCountElement.textContent = gameState.bones;
-            soulCountElement.textContent = gameState.souls;
-        }
-
-        // Update upgrade buttons state
-        function updateUpgradeButtons() {
-            document.querySelectorAll('.upgrade-btn, .auto-clicker-btn, .ritual-btn').forEach(button => {
-                const resource = button.getAttribute('data-resource');
-                const cost = parseInt(button.getAttribute('data-cost'));
-                
-                if (gameState[resource] >= cost) {
-                    button.disabled = false;
-                    button.classList.remove('opacity-50');
-                    button.classList.add('pulse');
-                } else {
-                    button.disabled = true;
-                    button.classList.add('opacity-50');
-                    button.classList.remove('pulse');
-                }
-            });
-        }
-
-        // Update auto-clicker counts
-        function updateAutoClickerCounts() {
-            document.getElementById('vampire-1-count').textContent = 
-                `${gameState.upgrades['vampire-1']} possuídos`;
-            document.getElementById('vampire-2-count').textContent = 
-                `${gameState.upgrades['vampire-2']} possuídos`;
-        }
-
-        // Handle mine click
-        mineArea.addEventListener('click', (e) => {
-            // Add blood
-            gameState.blood += gameState.clickPower;
-            
-            // Create blood drop effect
-            createBloodDrop(e);
-            
-            // Create sparkle
-            createSparkles(gameState.clickPower);
-            
-            // Update UI
-            updateResourceCounters();
-            updateUpgradeButtons();
-            
-            // Save game
-            saveGame();
-        });
-
-        // Create blood drop effect
-        function createBloodDrop(event) {
-            const drop = document.createElement('div');
-            drop.classList.add('blood-drop');
-            
-            const size = Math.random() * 10 + 5;
-            const x = event.clientX - mineArea.getBoundingClientRect().left;
-            const y = event.clientY - mineArea.getBoundingClientRect().top;
-            
-            drop.style.width = `${size}px`;
-            drop.style.height = `${size}px`;
-            drop.style.left = `${x}px`;
-            drop.style.top = `${y}px`;
-            
-            mineArea.appendChild(drop);
-            
-            // Animation
-            setTimeout(() => {
-                drop.style.transform = `translateY(${Math.random() * 30 + 20}px)`;
-                drop.style.opacity = '0';
-                setTimeout(() => {
-                    mineArea.removeChild(drop);
-                }, 1000);
-            }, 50);
-        }
-
-        // Create resource sparkles
-        function createSparkles(count) {
-            for (let i = 0; i < count; i++) {
-                const sparkle = document.createElement('div');
-                sparkle.classList.add('resource-sparkle');
-                
-                const x = Math.random() * mineArea.offsetWidth;
-                const y = Math.random() * mineArea.offsetHeight;
-                
-                sparkle.style.left = `${x}px`;
-                sparkle.style.top = `${y}px`;
-                
-                mineArea.appendChild(sparkle);
-                
-                // Animation
-                setTimeout(() => {
-                    sparkle.style.transform = `translate(${Math.random() * 40 - 20}px, ${Math.random() * 40 - 20}px)`;
-                    sparkle.style.opacity = '0';
-                    setTimeout(() => {
-                        mineArea.removeChild(sparkle);
-                    }, 1000);
-                }, 50);
             }
-        }
-
-        // Spawn bats for atmosphere
-        function spawnBats() {
-            const batCount = Math.floor(Math.random() * 3) + 1;
             
-            for (let i = 0; i < batCount; i++) {
-                const bat = document.createElement('div');
-                bat.classList.add('bat-animation');
-                
-                // Use text as placeholder for bat image
-                bat.innerHTML = '🦇';
-                bat.style.top = `${Math.random() * 100}%`;
-                bat.style.animationDelay = `${Math.random() * 5}s`;
-                
-                document.body.appendChild(bat);
-                
-                setTimeout(() => {
-                    document.body.removeChild(bat);
-                }, 15000);
-            }
+            typing();
         }
-
-        // Handle upgrade purchases
-        document.querySelectorAll('.upgrade-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                const resource = button.getAttribute('data-resource');
-                const cost = parseInt(button.getAttribute('data-cost'));
-                const upgrade = button.getAttribute('data-upgrade');
-                
-                if (gameState[resource] >= cost) {
-                    gameState[resource] -= cost;
-                    
-                    // Apply upgrade
-                    if (upgrade === 'click-power') {
-                        gameState.clickPower += 2;
-                        gameState.upgrades[upgrade] = true;
-                        button.disabled = true;
-                        button.textContent = 'Comprado!';
-                    } else if (upgrade === 'click-power-2') {
-                        gameState.clickPower += 5;
-                        gameState.upgrades[upgrade] = true;
-                        button.disabled = true;
-                        button.textContent = 'Comprado!';
-                    }
-                    
-                    updateUI();
-                    saveGame();
-                }
-            });
-        });
-
-        // Handle auto-clicker purchases
-        document.querySelectorAll('.auto-clicker-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                const resource = button.getAttribute('data-resource');
-                const cost = parseInt(button.getAttribute('data-cost'));
-                const upgrade = button.getAttribute('data-upgrade');
-                
-                if (gameState[resource] >= cost) {
-                    gameState[resource] -= cost;
-                    gameState.upgrades[upgrade]++;
-                    
-                    updateUI();
-                    saveGame();
-                    startAutoClickers(); // Restart to include new auto-clicker
-                }
-            });
-        });
-
-        // Handle ritual actions
-        document.querySelectorAll('.ritual-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                const resource = button.getAttribute('data-resource');
-                const cost = parseInt(button.getAttribute('data-cost'));
-                const upgrade = button.getAttribute('data-upgrade');
-                
-                if (gameState[resource] >= cost) {
-                    const ritual = gameState.ritals[upgrade];
-                    
-                    if (upgrade === 'ritual-1') {
-                        // Blood to Bones
-                        if (gameState.blood >= ritual.bloodCost) {
-                            gameState.blood -= ritual.bloodCost;
-                            gameState.souls -= ritual.soulCost;
-                            gameState.bones += ritual.boneReward;
-                        }
-                    } else if (upgrade === 'ritual-2') {
-                        // Blood and Bones to Souls
-                        if (gameState.blood >= ritual.bloodCost && gameState.bones >= ritual.boneCost) {
-                            gameState.blood -= ritual.bloodCost;
-                            gameState.bones -= ritual.boneCost;
-                            gameState.souls += ritual.soulReward;
-                        }
-                    }
-                    
-                    updateUI();
-                    saveGame();
-                }
-            });
-        });
-
-        // Tab functionality
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Update active tab button
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                
-                // Show corresponding content
-                const tabId = btn.getAttribute('data-tab');
-                document.querySelectorAll('.tab-content').forEach(content => {
-                    content.classList.remove('active');
+        
+        // Inicializar efeitos quando a página carregar
+        window.addEventListener('DOMContentLoaded', () => {
+            createBloodDrops();
+            
+            // Aplicar efeito de digitação ao título principal
+            const mainTitle = document.querySelector('header h1');
+            if (mainTitle) {
+                typeWriter(mainTitle, mainTitle.textContent, 100);
+            }
+            
+            // Efeito de hover nas cartas
+            const cards = document.querySelectorAll('.gothic-border');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.boxShadow = '0 0 20px rgba(139, 0, 0, 0.7)';
                 });
-                document.getElementById(tabId).classList.add('active');
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.boxShadow = '0 0 15px rgba(0, 0, 0, 0.5)';
+                });
             });
         });
-
-        // Initialize game when loaded
-        window.addEventListener('load', initGame);
     </script>
 </body>
 </html>
 
-```
-
-🎨 **Generating images based on descriptions...**
-
-✅ **Images generated successfully! Here's your updated content:**
-
-```html
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mina Sombria - Jogo Vampírico</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap');
-        
-        body {
-            font-family: 'IM Fell English SC', serif;
-            background-color: #0a0408;
-            color: #e0b0d0;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-        
-        .vampire-button {
-            background: linear-gradient(to bottom, #2a0a22 0%, #1a0515 100%);
-            border: 1px solid #6b2737;
-            color: #d9a3b3;
-            text-shadow: 0 0 5px #ff0000;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .vampire-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(139, 0, 0, 0.4);
-            color: #fff;
-            text-shadow: 0 0 10px #ff0000;
-        }
-        
-        .vampire-button:active {
-            transform: translateY(0);
-        }
-        
-        .vampire-button::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -60%;
-            width: 200%;
-            height: 200%;
-            background: rgba(255, 255, 255, 0.1);
-            transform: rotate(30deg);
-            transition: all 0.3s;
-        }
-        
-        .vampire-button:hover::after {
-            left: 100%;
-        }
-        
-        .blood-drop {
-            position: absolute;
-            background-color: rgba(139, 0, 0, 0.7);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 10;
-        }
-        
-        .mine-area {
-            background: linear-gradient(rgba(10, 4, 8, 0.7), rgba(10, 4, 8, 0.7)), 
-                        url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/75ab8333-454a-4403-aa92-c48ffa461bd6.png');
-            background-size: cover;
-            background-position: center;
-            border: 2px solid #6b2737;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .resource-sparkle {
-            position: absolute;
-            width: 5px;
-            height: 5px;
-            background-color: rgba(255, 215, 0, 0.8);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 5;
-        }
-        
-        .bat-animation {
-            position: absolute;
-            width: 30px;
-            height: 20px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            pointer-events: none;
-            z-index: 3;
-            animation: fly 15s linear infinite;
-        }
-        
-        @keyframes fly {
-            0% {
-                transform: translateX(-100px) rotateY(180deg);
-            }
-            100% {
-                transform: translateX(calc(100vw + 100px)) rotateY(180deg);
-            }
-        }
-        
-        .pulse {
-            animation: pulse 1s infinite alternate;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .tab-btn.active {
-            background: linear-gradient(to bottom, #4a0a22 0%, #2a0515 100%);
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
-        }
-        
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
-            }
-            100% {
-                transform: scale(1.05);
-                box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
-            }
-        }
-    </style>
-</head>
-<body class="p-4">
-    <header class="text-center mb-8">
-        <h1 class="text-4xl md:text-5xl font-bold text-red-900 mb-2">Mina Sombria</h1>
-        <div class="flex justify-center gap-8">
-            <div class="text-center">
-                <h3 class="text-xl text-purple-200">Sangue Coletado</h3>
-                <p id="blood-count" class="text-3xl text-red-400">0</p>
-            </div>
-            <div class="text-center">
-                <h3 class="text-xl text-purple-200">Ossos</h3>
-                <p id="bone-count" class="text-3xl text-gray-300">0</p>
-            </div>
-            <div class="text-center">
-                <h3 class="text-xl text-purple-200">Almas</h3>
-                <p id="soul-count" class="text-3xl text-blue-300">0</p>
-            </div>
-        </div>
-    </header>
-
-    <main class="max-w-4xl mx-auto">
-        <section class="mine-area rounded-lg h-64 w-full mb-8 flex items-center justify-center cursor-crosshair relative tab-content active" id="mine">
-        </section>
-
-        <section class="castle-area rounded-lg h-64 w-full mb-8 flex items-center justify-center relative tab-content" id="castle">
-            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/beb6e03e-aad4-457c-ae59-d841a3eaf0fb.png" 
-                 alt="Castelo sombrio com torres altas e vitrais sangrentos" 
-                 class="opacity-30 w-full h-full object-cover" />
-            <div class="absolute inset-0 flex items-center justify-center">
-                <p class="text-xl text-center p-4 bg-black bg-opacity-50 rounded-lg">
-                    Gerencie seu reino vampírico<br>
-                    <span class="text-sm text-red-300">Aprimore suas habilidades e servos</span>
-                </p>
-            </div>
-        </section>
-
-        <section class="hunt-area rounded-lg h-64 w-full mb-8 flex items-center justify-center relative tab-content" id="hunt">
-            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/725ee4a3-897f-4b20-b94a-5c74d5502297.png" 
-                 alt="Floresta sombria com lua cheia e névoa" 
-                 class="opacity-30 w-full h-full object-cover" />
-            <div class="absolute inset-0 flex items-center justify-center">
-                <p class="text-xl text-center p-4 bg-black bg-opacity-50 rounded-lg">
-                    Caçada noturna por recursos<br>
-                    <span class="text-sm text-red-300">Encontre vítimas e tesouros</span>
-                </p>
-            </div>
-        </section>
-            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/018095fd-60c0-420a-b233-95086bfc6956.png" 
-                 alt="Interior de caverna vampírica com paredes de pedra negra e veios de cristais vermelhos sangrentos" 
-                 class="opacity-30 w-full h-full object-cover" />
-            <div class="absolute inset-0 flex items-center justify-center">
-                <p class="text-xl text-center p-4 bg-black bg-opacity-50 rounded-lg">
-                    Clique na mina para extrair recursos<br>
-                    <span class="text-sm text-red-300">Cada clique rende 1 unidade de Sangue</span>
-                </p>
-            </div>
-        </section>
-
-        <section class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-            <div class="bg-black bg-opacity-30 p-4 rounded-lg border border-purple-900">
-                <h3 class="text-xl text-red-300 mb-2">Upgrades de Garra</h3>
-                <div class="space-y-2">
-                    <div>
-                        <button class="vampire-button w-full p-2 rounded mb-1 upgrade-btn" data-cost="100" data-resource="blood" data-upgrade="click-power">
-                            Garras Afiadas (Nível 1)<br>
-                            <span class="text-xs">+2 Sangue por clique</span>
-                            <span class="block text-yellow-300">Custo: 100 Sangue</span>
-                        </button>
-                    </div>
-                    <div>
-                        <button class="vampire-button w-full p-2 rounded mb-1 upgrade-btn" data-cost="500" data-resource="blood" data-upgrade="click-power-2">
-                            Garras Venenosas (Nível 2)<br>
-                            <span class="text-xs">+5 Sangue por clique</span>
-                            <span class="block text-yellow-300">Custo: 500 Sangue</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-black bg-opacity-30 p-4 rounded-lg border border-purple-900">
-                <h3 class="text-xl text-red-300 mb-2">Servos Vampíricos</h3>
-                <div class="space-y-2">
-                    <div>
-                        <button class="vampire-button w-full p-2 rounded mb-1 auto-clicker-btn" data-cost="50" data-resource="bones" data-upgrade="vampire-1">
-                            Morcego Familiar<br>
-                            <span class="text-xs">0.2 Sangue/seg</span>
-                            <span class="block text-yellow-300">Custo: 50 Ossos</span>
-                        </button>
-                        <p class="text-sm" id="vampire-1-count">0 possuídos</p>
-                    </div>
-                    <div>
-                        <button class="vampire-button w-full p-2 rounded mb-1 auto-clicker-btn" data-cost="250" data-resource="bones" data-upgrade="vampire-2">
-                            Vampiro Júnior<br>
-                            <span class="text-xs">1 Sangue/seg</span>
-                            <span class="block text-yellow-300">Custo: 250 Ossos</span>
-                        </button>
-                        <p class="text-sm" id="vampire-2-count">0 possuídos</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-black bg-opacity-30 p-4 rounded-lg border border-purple-900">
-                <h3 class="text-xl text-red-300 mb-2">Rituais Sombrios</h3>
-                <div class="space-y-2">
-                    <div>
-                        <button class="vampire-button w-full p-2 rounded mb-1 ritual-btn" data-cost="100" data-resource="souls" data-upgrade="ritual-1">
-                            Ritual de Transformação<br>
-                            <span class="text-xs">Converte 100 Sangue em 1 Osso</span>
-                            <span class="block text-yellow-300">Custo: 1 Alma</span>
-                        </button>
-                    </div>
-                    <div>
-                        <button class="vampire-button w-full p-2 rounded mb-1 ritual-btn" data-cost="1000" data-resource="souls" data-upgrade="ritual-2">
-                            Sacrifício Sanguinário<br>
-                            <span class="text-xs">Converte 1000 Sangue em 1 Alma</span>
-                            <span class="block text-yellow-300">Custo: 10 Ossos</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <div class="flex justify-center mb-8">
-        <button class="vampire-button px-4 py-2 mx-2 tab-btn active" data-tab="mining">Mineração</button>
-        <button class="vampire-button px-4 py-2 mx-2 tab-btn" data-tab="castle">Castelo</button>
-        <button class="vampire-button px-4 py-2 mx-2 tab-btn" data-tab="hunt">Caçada</button>
-    </div>
-
-    <script>
-        // Game state
-        const gameState = {
-            blood: 0,
-            bones: 0,
-            souls: 0,
-            clickPower: 1,
-            upgrades: {
-                'click-power': false,
-                'click-power-2': false,
-                'vampire-1': 0,
-                'vampire-2': 0
-            },
-            autoClickers: {
-                'vampire-1': {
-                    rate: 0.2,
-                    cost: 50
-                },
-                'vampire-2': {
-                    rate: 1,
-                    cost: 250
-                }
-            },
-            rituals: {
-                'ritual-1': {
-                    bloodCost: 100,
-                    boneReward: 1,
-                    soulCost: 1
-                },
-                'ritual-2': {
-                    bloodCost: 1000,
-                    soulReward: 1,
-                    boneCost: 10
-                }
-            }
-        };
-
-        // DOM elements
-        const mineArea = document.getElementById('mine');
-        const bloodCountElement = document.getElementById('blood-count');
-        const boneCountElement = document.getElementById('bone-count');
-        const soulCountElement = document.getElementById('soul-count');
-
-        // Auto-clicker interval
-        let autoClickerInterval;
-
-        // Initialize game
-        function initGame() {
-            updateUI();
-            loadGame();
-            startAutoClickers();
-            
-            // Add bats for atmosphere
-            spawnBats();
-            setInterval(spawnBats, 10000);
-        }
-
-        // Save game to localStorage
-        function saveGame() {
-            localStorage.setItem('vampireMineSave', JSON.stringify(gameState));
-        }
-
-        // Load game from localStorage
-        function loadGame() {
-            const savedGame = localStorage.getItem('vampireMineSave');
-            if (savedGame) {
-                const parsedGame = JSON.parse(savedGame);
-                Object.assign(gameState, parsedGame);
-                updateUI();
-            }
-        }
-
-        // Start auto-clickers
-        function startAutoClickers() {
-            if (autoClickerInterval) clearInterval(autoClickerInterval);
-            
-            autoClickerInterval = setInterval(() => {
-                let bloodPerSecond = 0;
-                
-                // Calculate blood from all auto-clickers
-                bloodPerSecond += gameState.upgrades['vampire-1'] * 0.2;
-                bloodPerSecond += gameState.upgrades['vampire-2'] * 1;
-                
-                if (bloodPerSecond > 0) {
-                    gameState.blood += bloodPerSecond;
-                    updateResourceCounters();
-                    createSparkles(Math.floor(bloodPerSecond));
-                }
-            }, 1000);
-        }
-
-        // Update all UI elements
-        function updateUI() {
-            updateResourceCounters();
-            updateUpgradeButtons();
-            updateAutoClickerCounts();
-        }
-
-        // Update resource counters
-        function updateResourceCounters() {
-            bloodCountElement.textContent = Math.floor(gameState.blood);
-            boneCountElement.textContent = gameState.bones;
-            soulCountElement.textContent = gameState.souls;
-        }
-
-        // Update upgrade buttons state
-        function updateUpgradeButtons() {
-            document.querySelectorAll('.upgrade-btn, .auto-clicker-btn, .ritual-btn').forEach(button => {
-                const resource = button.getAttribute('data-resource');
-                const cost = parseInt(button.getAttribute('data-cost'));
-                
-                if (gameState[resource] >= cost) {
-                    button.disabled = false;
-                    button.classList.remove('opacity-50');
-                    button.classList.add('pulse');
-                } else {
-                    button.disabled = true;
-                    button.classList.add('opacity-50');
-                    button.classList.remove('pulse');
-                }
-            });
-        }
-
-        // Update auto-clicker counts
-        function updateAutoClickerCounts() {
-            document.getElementById('vampire-1-count').textContent = 
-                `${gameState.upgrades['vampire-1']} possuídos`;
-            document.getElementById('vampire-2-count').textContent = 
-                `${gameState.upgrades['vampire-2']} possuídos`;
-        }
-
-        // Handle mine click
-        mineArea.addEventListener('click', (e) => {
-            // Add blood
-            gameState.blood += gameState.clickPower;
-            
-            // Create blood drop effect
-            createBloodDrop(e);
-            
-            // Create sparkle
-            createSparkles(gameState.clickPower);
-            
-            // Update UI
-            updateResourceCounters();
-            updateUpgradeButtons();
-            
-            // Save game
-            saveGame();
-        });
-
-        // Create blood drop effect
-        function createBloodDrop(event) {
-            const drop = document.createElement('div');
-            drop.classList.add('blood-drop');
-            
-            const size = Math.random() * 10 + 5;
-            const x = event.clientX - mineArea.getBoundingClientRect().left;
-            const y = event.clientY - mineArea.getBoundingClientRect().top;
-            
-            drop.style.width = `${size}px`;
-            drop.style.height = `${size}px`;
-            drop.style.left = `${x}px`;
-            drop.style.top = `${y}px`;
-            
-            mineArea.appendChild(drop);
-            
-            // Animation
-            setTimeout(() => {
-                drop.style.transform = `translateY(${Math.random() * 30 + 20}px)`;
-                drop.style.opacity = '0';
-                setTimeout(() => {
-                    mineArea.removeChild(drop);
-                }, 1000);
-            }, 50);
-        }
-
-        // Create resource sparkles
-        function createSparkles(count) {
-            for (let i = 0; i < count; i++) {
-                const sparkle = document.createElement('div');
-                sparkle.classList.add('resource-sparkle');
-                
-                const x = Math.random() * mineArea.offsetWidth;
-                const y = Math.random() * mineArea.offsetHeight;
-                
-                sparkle.style.left = `${x}px`;
-                sparkle.style.top = `${y}px`;
-                
-                mineArea.appendChild(sparkle);
-                
-                // Animation
-                setTimeout(() => {
-                    sparkle.style.transform = `translate(${Math.random() * 40 - 20}px, ${Math.random() * 40 - 20}px)`;
-                    sparkle.style.opacity = '0';
-                    setTimeout(() => {
-                        mineArea.removeChild(sparkle);
-                    }, 1000);
-                }, 50);
-            }
-        }
-
-        // Spawn bats for atmosphere
-        function spawnBats() {
-            const batCount = Math.floor(Math.random() * 3) + 1;
-            
-            for (let i = 0; i < batCount; i++) {
-                const bat = document.createElement('div');
-                bat.classList.add('bat-animation');
-                
-                // Use text as placeholder for bat image
-                bat.innerHTML = '🦇';
-                bat.style.top = `${Math.random() * 100}%`;
-                bat.style.animationDelay = `${Math.random() * 5}s`;
-                
-                document.body.appendChild(bat);
-                
-                setTimeout(() => {
-                    document.body.removeChild(bat);
-                }, 15000);
-            }
-        }
-
-        // Handle upgrade purchases
-        document.querySelectorAll('.upgrade-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                const resource = button.getAttribute('data-resource');
-                const cost = parseInt(button.getAttribute('data-cost'));
-                const upgrade = button.getAttribute('data-upgrade');
-                
-                if (gameState[resource] >= cost) {
-                    gameState[resource] -= cost;
-                    
-                    // Apply upgrade
-                    if (upgrade === 'click-power') {
-                        gameState.clickPower += 2;
-                        gameState.upgrades[upgrade] = true;
-                        button.disabled = true;
-                        button.textContent = 'Comprado!';
-                    } else if (upgrade === 'click-power-2') {
-                        gameState.clickPower += 5;
-                        gameState.upgrades[upgrade] = true;
-                        button.disabled = true;
-                        button.textContent = 'Comprado!';
-                    }
-                    
-                    updateUI();
-                    saveGame();
-                }
-            });
-        });
-
-        // Handle auto-clicker purchases
-        document.querySelectorAll('.auto-clicker-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                const resource = button.getAttribute('data-resource');
-                const cost = parseInt(button.getAttribute('data-cost'));
-                const upgrade = button.getAttribute('data-upgrade');
-                
-                if (gameState[resource] >= cost) {
-                    gameState[resource] -= cost;
-                    gameState.upgrades[upgrade]++;
-                    
-                    updateUI();
-                    saveGame();
-                    startAutoClickers(); // Restart to include new auto-clicker
-                }
-            });
-        });
-
-        // Handle ritual actions
-        document.querySelectorAll('.ritual-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                const resource = button.getAttribute('data-resource');
-                const cost = parseInt(button.getAttribute('data-cost'));
-                const upgrade = button.getAttribute('data-upgrade');
-                
-                if (gameState[resource] >= cost) {
-                    const ritual = gameState.ritals[upgrade];
-                    
-                    if (upgrade === 'ritual-1') {
-                        // Blood to Bones
-                        if (gameState.blood >= ritual.bloodCost) {
-                            gameState.blood -= ritual.bloodCost;
-                            gameState.souls -= ritual.soulCost;
-                            gameState.bones += ritual.boneReward;
-                        }
-                    } else if (upgrade === 'ritual-2') {
-                        // Blood and Bones to Souls
-                        if (gameState.blood >= ritual.bloodCost && gameState.bones >= ritual.boneCost) {
-                            gameState.blood -= ritual.bloodCost;
-                            gameState.bones -= ritual.boneCost;
-                            gameState.souls += ritual.soulReward;
-                        }
-                    }
-                    
-                    updateUI();
-                    saveGame();
-                }
-            });
-        });
-
-        // Tab functionality
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Update active tab button
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                
-                // Show corresponding content
-                const tabId = btn.getAttribute('data-tab');
-                document.querySelectorAll('.tab-content').forEach(content => {
-                    content.classList.remove('active');
-                });
-                document.getElementById(tabId).classList.add('active');
-            });
-        });
-
-        // Initialize game when loaded
-        window.addEventListener('load', initGame);
-    </script>
-</body>
-</html>
-
-```
